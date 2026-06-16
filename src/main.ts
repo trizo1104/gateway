@@ -14,16 +14,16 @@ async function bootstrap() {
     credentials: true,
   });
 
-  // app.useGlobalPipes(
-  //   new ValidationPipe({
-  //     whitelist: true,
-  //     forbidNonWhitelisted: true,
-  //     transform: true,
-  //     transformOptions: {
-  //       enableImplicitConversion: true,
-  //     },
-  //   }),
-  // );
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true, // allows only properties that are defined in the DTO
+      forbidNonWhitelisted: true, // throws an error if non-whitelisted properties are present
+      transform: true, // automatically transforms payloads to be objects typed according to their DTO classes "123" -> 123
+      transformOptions: {
+        enableImplicitConversion: true, // allows primitive types to be automatically converted based on the DTO type definitions
+      },
+    }),
+  );
 
   app.useGlobalInterceptors(new ResponseInterceptor());
   app.useGlobalFilters(new HttpExceptionFilter());

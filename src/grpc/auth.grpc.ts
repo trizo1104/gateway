@@ -15,7 +15,7 @@ export const authGrpcProvider: ClientProviderOptions = {
   options: {
     package: 'auth',
     protoPath: join(PROTO_ROOT, 'auth/service.proto'),
-    url: 'localhost:5001',
+    url: process.env.AUTH_GRPC_URL ?? 'localhost:5001',
     loader: {
       includeDirs: [PROTO_ROOT],
     },
